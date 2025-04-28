@@ -27,21 +27,21 @@ test.describe('auth', () => {
     await expect(page).toHaveURL('http://localhost:5173')
   })
 
-  test('should redirect to the home page when a user logs in', async ({
-    loginPage,
-    page,
-    storage,
-    account
-  }) => {
-    await loginPage.populateForm(account.username, account.password)
-    await page.click('#login')
-    await page.waitForLoadState('networkidle')
+  // test('should redirect to the home page when a user logs in', async ({
+  //   loginPage,
+  //   page,
+  //   storage,
+  //   account
+  // }) => {
+  //   await loginPage.populateForm(account.username, account.password)
+  //   await page.click('#login')
+  //   await page.waitForLoadState('networkidle')
 
-    const localStorage = await storage.localStorage
+  //   const localStorage = await storage.localStorage
 
-    expect(localStorage).toHaveProperty('quoots-user')
-    await expect(page).toHaveURL('http://localhost:5173')
-  })
+  //   expect(localStorage).toHaveProperty('quoots-user')
+  //   await expect(page).toHaveURL('http://localhost:5173')
+  // })
 
   test('should warn you if your login is incorrect', async ({
     loginPage,

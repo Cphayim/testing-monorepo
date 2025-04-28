@@ -90,7 +90,7 @@ describe('tags.service', () => {
 
       await TagService.upsertTags(['tag1', 'tag2', 'tag3'])
 
-      expect(prismaMock.$transaction).toHaveReturnedWith([1, 2, 3])
+      expect(prismaMock.$transaction).toHaveResolvedWith([1, 2, 3])
     })
 
     it('should return an empty string if no tags passed', async () => {
@@ -104,7 +104,7 @@ describe('tags.service', () => {
 
       await TagService.upsertTags([])
 
-      expect(prismaMock.$transaction).toHaveReturnedWith([])
+      expect(prismaMock.$transaction).toHaveResolvedWith([])
     })
   })
 })
