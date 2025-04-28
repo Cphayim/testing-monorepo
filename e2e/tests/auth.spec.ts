@@ -4,8 +4,8 @@ test.describe('auth', () => {
   test('should redirect unauthorized user to the login page', async ({
     page
   }) => {
-    await page.goto('http://localhost:5173/')
-    await expect(page).toHaveURL('http://localhost:5173/login')
+    await page.goto('http://127.0.0.1:5173/')
+    await expect(page).toHaveURL('http://127.0.0.1:5173/login')
   })
 
   test('should redirect to the home page when a new account is created', async ({
@@ -24,7 +24,7 @@ test.describe('auth', () => {
     const localStorage = await storage.localStorage
 
     expect(localStorage).toHaveProperty('quoots-user')
-    await expect(page).toHaveURL('http://localhost:5173')
+    await expect(page).toHaveURL('http://127.0.0.1:5173')
   })
 
   // test('should redirect to the home page when a user logs in', async ({
@@ -40,7 +40,7 @@ test.describe('auth', () => {
   //   const localStorage = await storage.localStorage
 
   //   expect(localStorage).toHaveProperty('quoots-user')
-  //   await expect(page).toHaveURL('http://localhost:5173')
+  //   await expect(page).toHaveURL('http://127.0.0.1:5173')
   // })
 
   test('should warn you if your login is incorrect', async ({
@@ -51,7 +51,7 @@ test.describe('auth', () => {
     await page.click('#login')
     await page.waitForLoadState('networkidle')
 
-    await expect(page).toHaveURL('http://localhost:5173/login')
+    await expect(page).toHaveURL('http://127.0.0.1:5173/login')
     await expect(page.getByText('Account not found.')).toBeVisible()
   })
 
@@ -62,7 +62,7 @@ test.describe('auth', () => {
   }) => {
     await loginPage.populateForm(account.username, account.password)
     await page.click('#signup')
-    await expect(page).toHaveURL('http://localhost:5173/login')
+    await expect(page).toHaveURL('http://127.0.0.1:5173/login')
     await expect(
       page.getByText('A user already exists with that username')
     ).toBeVisible()
@@ -71,7 +71,7 @@ test.describe('auth', () => {
   test('should warn you if your form is empty', async ({ page, loginPage }) => {
     await loginPage.page.click('#login')
 
-    await expect(page).toHaveURL('http://localhost:5173/login')
+    await expect(page).toHaveURL('http://127.0.0.1:5173/login')
     await expect(
       page.getByText('Please enter a username and password')
     ).toBeVisible()
@@ -91,7 +91,7 @@ test.describe('auth', () => {
 
     const localStorage = await storage.localStorage
 
-    await expect(page).toHaveURL('http://localhost:5173/login')
+    await expect(page).toHaveURL('http://127.0.0.1:5173/login')
     expect(localStorage).not.toHaveProperty('quoots-user')
   })
 })
