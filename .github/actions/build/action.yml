@@ -9,6 +9,15 @@ runs:
         version: latest
     - name: Install Node.js
       uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'pnpm'
+    - name: Clean pnpm store
+      shell: bash
+      run: pnpm store prune
     - name: Install dependencies
       shell: bash
-      run: pnpm install
+      run: pnpm install --force
+    - name: Debug bcrypt installation
+      run: |
+        ls -la node_modules/.pnpm/bcrypt@5.1.1/node_modules/bcrypt/lib/binding/napi-v3/
