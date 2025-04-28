@@ -1,24 +1,24 @@
 name: 'Build'
 description: 'Sets up the repository'
+
+inputs:
+  node-version:
+    description: 'Node.js version to use'
+    required: true
+    default: '18' # 默认版本
+
 runs:
   using: 'composite'
   steps:
     - name: Set up pnpm
-      uses: pnpm/action-setup@v2
+      uses: pnpm/action-setup@v4
       with:
-        version: latest
+        version: 10
     - name: Install Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: ${{ inputs.node-version }}
         cache: 'pnpm'
-    - name: Clean pnpm store
-      shell: bash
-      run: pnpm store prune
     - name: Install dependencies
       shell: bash
-      run: pnpm install --force
-    - name: Debug bcrypt installation
-      shell: bash
-      run: |
-        ls -la node_modules/.pnpm/bcrypt@5.1.1/node_modules/bcrypt/lib/binding/napi-v3/
+      run: pnpm install
